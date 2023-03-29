@@ -2,7 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  devtool: "cheap-eval-source-map",
+  mode: process.env.NODE_ENV || "development",
+  devtool: "inline-cheap-source-map",
   entry: "./docs/entry.js",
   output: {
     path: path.join(__dirname, "dist"),
@@ -22,12 +23,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
-  ],
   devServer: {
-    contentBase: "docs/"
+    static: "docs/"
   }
 };
